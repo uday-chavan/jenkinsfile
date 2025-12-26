@@ -2,25 +2,18 @@ pipeline {
     agent any
 
     environment {
-        APP_NAME = "demo-app"
+        ENV = "dev"
+        VERSION = "1.0"
     }
 
     stages {
-        stage('Build') {
+        stage('Show Env') {
             steps {
-                echo "Building $APP_NAME"
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo "Running tests"
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo "Deploying application"
+                sh '''
+                env
+                echo "ENV=$ENV"
+                echo "VERSION=$VERSION"
+                '''
             }
         }
     }
