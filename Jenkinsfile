@@ -2,29 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone') {
-            steps {
-                echo "Cloning code"
-            }
-        }
-
         stage('Build') {
             steps {
-                echo "Building project"
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo "Testing application"
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo "Deploying app"
+                sh '''
+                mkdir -p target
+                echo "demo jar" > target/demo-app.jar
+                '''
             }
         }
     }
-}
 
+    post {
+        success {
+            archiveArtifacts artifacts: '**/*.jar', fingerprint: true
+        }
+    }
+}
