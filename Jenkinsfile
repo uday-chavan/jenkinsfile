@@ -1,19 +1,28 @@
 pipeline {
     agent any
 
-    environment {
-        ENV = "dev"
-        VERSION = "1.0"
-    }
-
     stages {
-        stage('Show Env') {
+        stage('Clone') {
             steps {
-                sh '''
-                env
-                echo "ENV=$ENV"
-                echo "VERSION=$VERSION"
-                '''
+                echo "Cloning code"
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building project"
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Testing application"
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying app"
             }
         }
     }
